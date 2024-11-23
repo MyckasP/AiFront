@@ -1,23 +1,32 @@
-import axios from "axios";
+import axios from 'axios';
+
+export interface SavedChat {
+    name: string;
+    content: string;
+}
 
 export class ChatService {
-    private readonly baseUrl: string = "https://localhost:7096/api/Chat";
+    private readonly baseUrl: string = 'https://localhost:7096/api/Chat';
 
-    async saveChat(userId: number, chatContent: string): Promise<string> {
+    async saveChat(userId: number, chatContent: string, chatName: string): Promise<string> {
         try {
-            const response = await axios.post<{ message: string }>(`${this.baseUrl}/saveChat`, { userId, chatContent });
-            return response.data.message; // Assuming the backend returns { message: "Chat saved successfully." }
+            const response = await axios.post<{ message: string }>(`${this.baseUrl}/saveChat`, {
+                userId,
+                chatContent,
+                chatName,
+            });
+            return response.data.message;
         } catch (error: any) {
-            throw new Error(error.response?.data || "Failed to save chat.");
+            throw new Error(error.response?.data || 'Failed to save chat.');
         }
     }
 
-    async getSavedChats(userId: number): Promise<string[]> {
+    async getSavedChats(userId: number): Promise<SavedChat[]> {
         try {
-            const response = await axios.get<string[]>(`${this.baseUrl}/getChats/${userId}`);
-            return response.data; // Assuming the backend returns an array of chat strings
+            const response = await axios.get<SavedChat[]>(`${this.baseUrl}/getChats/${userId}`);
+            return response.data;
         } catch (error: any) {
-            throw new Error(error.response?.data || "Failed to fetch saved chats.");
+            throw new Error(error.response?.data || 'Failed to fetch saved chats.');
         }
     }
 }
