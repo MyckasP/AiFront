@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?display=swap&family=Lexend:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900");
+
+.design-root {
+    font-family: "Lexend", "Noto Sans", sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f8fafc;
+    overflow-x: hidden;
+}
+
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.logout-button {
+    background-color: #f56565;
+    color: #fff;
+}
+
+.logout-button:hover {
+    background-color: #c53030;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2.5rem;
+    border-bottom: 1px solid #e7edf4;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    width: 32px;
+    height: 32px;
+}
+
+.title {
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: #0d141c;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    padding: 0 1rem;
+    border-radius: 9999px;
+    background-color: #e7edf4;
+    color: #0d141c;
+    font-size: 0.875rem;
+    font-weight: bold;
+}
+
+.avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 10rem;
+}
+
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+    background-image: linear-gradient(
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0.4) 100%
+    ),
+    url("https://cdn.usegalileo.ai/sdxl10/d8b47e60-8e57-4e08-8692-e0c2b5c54f4c.png");
+    background-size: cover;
+    background-position: center;
+    border-radius: 1rem;
+    padding: 2rem;
+    min-height: 30rem;
+}
+
+.text-section {
+    margin-top: 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.main-heading {
+    font-size: 2.25rem;
+    font-weight: 900;
+    color: #1a1a1a;
+}
+
+.sub-heading {
+    font-size: 1rem;
+    color: #1a1a1a;
+}
+
+.cta-button {
+    background-color: #258df4;
+    color: #f8fafc;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 9999px;
+    padding: 0.75rem 2rem;
+}

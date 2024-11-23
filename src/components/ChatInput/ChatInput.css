@@ -1,0 +1,133 @@
+/* Global Styles */
+@import url('https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900');
+body{
+    background: white;
+}
+
+.chat-input-container {
+    position: relative;
+    display: flex;
+    height: 100vh;
+    background-color: #f8f8f8;
+}
+
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.layout-content-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 960px;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.title {
+    color: #0d141c;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.4;
+    margin-bottom: 12px;
+}
+
+.description {
+    color: #0d141c;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.select-container {
+    display: flex;
+    max-width: 480px;
+    gap: 16px;
+    padding: 12px;
+}
+
+.select-label {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.select-title {
+    color: #0d141c;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.select-input {
+    width: 100%;
+    height: 56px;
+    padding: 12px;
+    font-size: 14px;
+    color: #0d141c;
+    border-radius: 12px;
+    border: 1px solid #cedbe8;
+    background-color: #f8f8f8;
+    background-image: url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2724px%27 height=%2724px%27 fill=%27rgb(73,115,156)%27 viewBox=%270 0 256 256%27%3e%3cpath d=%27M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z%27%3e%3c/path%3e%3c/svg%3e');
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 24px;
+    border-color: #cedbe8;
+    outline: none;
+    cursor: pointer;
+}
+
+select,
+input[type="number"] {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 12px;
+}
+
+.cancel-button,
+.continue-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 9999px;
+    width: 120px;
+    height: 40px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.cancel-button {
+    background-color: #e7edf4;
+    color: #0d141c;
+}
+
+.continue-button {
+    background-color: #258df4;
+    color: #ffffff;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
