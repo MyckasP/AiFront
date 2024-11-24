@@ -138,3 +138,16 @@
     background-color: #f1f2f6; /* Light gray for AI messages */
     align-self: flex-start;
 }
+.exit-icon {
+    width: 55px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px; /* Adjusted size */
+    color: #2c3e50; /* Matches the header color */
+    cursor: pointer; /* Smooth hover effect */
+}
+
+

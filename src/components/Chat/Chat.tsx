@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { ChatService, SavedChat } from '../../Services/chat.service';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { ChatService } from '../../Services/chat.service';
 import './Chat.css';
+import { SavedChat } from '../../Services/chat.service';
 
 interface LocationState {
     aiResponse: string;
@@ -11,100 +12,150 @@ interface LocationState {
 const Chat: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { aiResponse, learningFormat } = location.state as LocationState;
-    const [savedChats, setSavedChats] = useState<SavedChat[]>([]);
-    const [loading, setLoading] = useState(false);
+    const { aiResponse = '', learningFormat = 'paragraph' } = (location.state || {}) as Partial<LocationState>;
     const [chatName, setChatName] = useState('');
     const [showModal, setShowModal] = useState(false);
     const [userId, setUserId] = useState<number | null>(null);
+    const [savedChats, setSavedChats] = useState<SavedChat[]>([]);
+    const [selectedChat, setSelectedChat] = useState<SavedChat | null>(null);
     const chatService = new ChatService();
 
-    const handleSaveChat = () => {
-        setShowModal(true);
-    };
+    const handleSaveChat = () => setShowModal(true);
 
     const saveChatWithName = async () => {
         if (!chatName.trim()) {
-            alert("Please provide a valid name for the chat.");
+            alert('Please provide a valid name for the chat.');
             return;
         }
         if (userId === null) {
-            alert("User not logged in.");
+            alert('User not logged in.');
             return;
         }
         try {
-            setLoading(true);
-            const message = await chatService.saveChat(userId, aiResponse, chatName);
-            setSavedChats((prevChats) => [...prevChats, { name: chatName, content: aiResponse }]);
+            await chatService.saveChat(userId, aiResponse, chatName);
             setChatName('');
             setShowModal(false);
-            alert(message);
+            alert('Chat saved successfully');
+            await fetchSavedChats(); // Refresh saved chats
         } catch (error: any) {
             console.error('Error saving chat:', error.message);
             alert('Failed to save chat.');
-        } finally {
-            setLoading(false);
         }
     };
 
     const fetchSavedChats = async () => {
         if (userId === null) return;
         try {
-            setLoading(true);
             const chats = await chatService.getSavedChats(userId);
-            setSavedChats(chats);
+            const mappedChats = chats.map((chat: any) => ({
+                name: chat.chatName,
+                content: chat.chatContent,
+                timestamp: chat.timestamp,
+            }));
+            setSavedChats(mappedChats);
         } catch (error: any) {
             console.error('Error fetching saved chats:', error.message);
-            alert('Failed to fetch saved chats.');
-        } finally {
-            setLoading(false);
         }
     };
-
-    const renderSavedChats = () => savedChats.map((chat, index) => (
-        <li
-            key={index}
-            className="saved-chat-item"
-            onClick={() => navigate(`/chat/${index}`, { state: { aiResponse: chat.content, learningFormat } })}
-        >
-            {chat.name}
-        </li>
-    ));
 
     useEffect(() => {
         const storedUserId = localStorage.getItem('userId');
         if (storedUserId) {
-            setUserId(Number(storedUserId));
+            const id = Number(storedUserId);
+            setUserId(id);
         }
-        fetchSavedChats();
+    }, []);
+
+    useEffect(() => {
+        if (userId !== null) {
+            fetchSavedChats();
+        }
     }, [userId]);
 
     const renderContent = () => {
+        if (selectedChat) {
+            return (
+                <div>
+                    <h4>{selectedChat.name}</h4>
+                    <p>{selectedChat.content}</p>
+                </div>
+            );
+        }
+
+        const content = aiResponse || '';
         if (learningFormat === 'bulletPoints') {
-            const points = aiResponse.split('\n').filter((point) => point.trim() !== '');
+            const points = content.split('\n').filter((point) => point.trim() !== '');
             return (
                 <ul className="chat-bullet-list">
-                    {points.map((point, index) => <li key={index}>{point}</li>)}
+                    {points.map((point, index) => (
+                        <li key={index}>{point}</li>
+                    ))}
                 </ul>
             );
         }
-        return <p className="chat-paragraph">{aiResponse}</p>;
+        return <p className="chat-paragraph">{content}</p>;
+    };
+
+    const selectChat = (chat: SavedChat) => {
+        setSelectedChat(chat);
     };
 
     return (
         <div className="chat-wrapper">
             <div className="chat-sidebar">
                 <div className="sidebar-header">Saved Chats</div>
-                {loading ? <p>Loading...</p> : <ul className="saved-chats-list">{renderSavedChats()}</ul>}
-                <button className="save-chat-button" onClick={handleSaveChat} disabled={loading}>
-                    {loading ? 'Saving...' : 'Save Chat'}
+                <button className="save-chat-button" onClick={handleSaveChat}>
+                    Save Chat
                 </button>
+                <div className="saved-chats-list">
+                    {savedChats.length > 0 ? (
+                        savedChats.map((chat, index) => (
+                            <div
+                                key={index}
+                                className="saved-chat-item"
+                                onClick={() => selectChat(chat)}
+                                role="button"
+                                tabIndex={0}
+                                onKeyDown={(e) => e.key === 'Enter' && selectChat(chat)}
+                            >
+                                <h4>{chat.name || 'Untitled Chat'}</h4>
+                            </div>
+                        ))
+                    ) : (
+                        <p>No saved chats available.</p>
+                    )}
+                </div>
             </div>
             <div className="chat-container">
-                <div className="chat-header">AI Suggested Learning Content</div>
-                <div className="chat-content">{renderContent()}</div>
+                <div className="chat-header">
+                    {selectedChat ? `Chat: ${selectedChat.name}` : 'AI Suggested Learning Content'}
+                    <button
+                        className="exit-icon"
+                        onClick={() => navigate('/front')}
+                        title="Exit"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="feather feather-log-out"
+                        >
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div className="chat-content">
+                    {renderContent()}
+                </div>
                 <div className="chat-footer">
-                    End of the conversation
                     <button className="new-chat-button" onClick={() => navigate('/ChatInput')}>
                         Create Another Learning Chat
                     </button>

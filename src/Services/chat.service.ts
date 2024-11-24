@@ -3,6 +3,7 @@ import axios from 'axios';
 export interface SavedChat {
     name: string;
     content: string;
+    timestamp?: string; // Optional for future display
 }
 
 export class ChatService {
@@ -17,7 +18,11 @@ export class ChatService {
             });
             return response.data.message;
         } catch (error: any) {
-            throw new Error(error.response?.data || 'Failed to save chat.');
+            if (error.response) {
+                const errorMessage = error.response?.data || 'An error occurred while saving the chat.';
+                throw new Error(errorMessage);
+            }
+            throw new Error('An unexpected error occurred.');
         }
     }
 
@@ -26,7 +31,11 @@ export class ChatService {
             const response = await axios.get<SavedChat[]>(`${this.baseUrl}/getChats/${userId}`);
             return response.data;
         } catch (error: any) {
-            throw new Error(error.response?.data || 'Failed to fetch saved chats.');
+            if (error.response) {
+                const errorMessage = error.response?.data || 'An error occurred while fetching the saved chats.';
+                throw new Error(errorMessage);
+            }
+            throw new Error('An unexpected error occurred.');
         }
     }
 }

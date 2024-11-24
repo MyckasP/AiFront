@@ -13,7 +13,7 @@ const Front = () => {
     };
 
     const handleGetStarted = () => {
-        navigate("/chatinput");  // Navigate to ChatInput page
+        navigate("/chat");  // Navigate to ChatInput page
     };
 
     return (
