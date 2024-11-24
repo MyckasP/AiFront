@@ -36,7 +36,7 @@ const Chat: React.FC = () => {
             setChatName('');
             setShowModal(false);
             alert('Chat saved successfully');
-            await fetchSavedChats(); // Refresh saved chats
+            await fetchSavedChats();
         } catch (error: any) {
             console.error('Error saving chat:', error.message);
             alert('Failed to save chat.');
@@ -104,9 +104,7 @@ const Chat: React.FC = () => {
         <div className="chat-wrapper">
             <div className="chat-sidebar">
                 <div className="sidebar-header">Saved Chats</div>
-                <button className="save-chat-button" onClick={handleSaveChat}>
-                    Save Chat
-                </button>
+
                 <div className="saved-chats-list">
                     {savedChats.length > 0 ? (
                         savedChats.map((chat, index) => (
@@ -157,22 +155,27 @@ const Chat: React.FC = () => {
                 </div>
                 <div className="chat-footer">
                     <button className="new-chat-button" onClick={() => navigate('/ChatInput')}>
-                        Create Another Learning Chat
+                        Create Study Plan
+                    </button>
+                    <button className="save-chat-button" onClick={handleSaveChat}>
+                        Save Chat
                     </button>
                 </div>
             </div>
             {showModal && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <h3>Save Chat</h3>
-                        <input
-                            type="text"
-                            placeholder="Enter a name for the chat"
-                            value={chatName}
-                            onChange={(e) => setChatName(e.target.value)}
-                        />
-                        <button onClick={saveChatWithName}>Save</button>
-                        <button onClick={() => setShowModal(false)}>Cancel</button>
+                <div className="modal-overlay">
+                    <div className="modal">
+                        <div className="modal-content">
+                            <h3>Save Chat</h3>
+                            <input
+                                type="text"
+                                placeholder="Enter a name for the chat"
+                                value={chatName}
+                                onChange={(e) => setChatName(e.target.value)}
+                            />
+                            <button onClick={saveChatWithName}>Save</button>
+                            <button onClick={() => setShowModal(false)}>Cancel</button>
+                        </div>
                     </div>
                 </div>
             )}

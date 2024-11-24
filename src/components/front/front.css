@@ -1,11 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?display=swap&family=Lexend:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900");
 
+body {
+    margin: 0;
+    background-color: #121212; /* Dark mode body background */
+    color: #e0e0e0; /* Light text color for dark mode */
+}
+
 .design-root {
     font-family: "Lexend", "Noto Sans", sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #f8fafc;
+    background-color: #121212; /* Match body background */
     overflow-x: hidden;
 }
 
@@ -14,13 +20,14 @@
     flex-direction: column;
     height: 100%;
 }
+
 .logout-button {
-    background-color: #f56565;
+    background-color: #e57373;
     color: #fff;
 }
 
 .logout-button:hover {
-    background-color: #c53030;
+    background-color: #d32f2f;
 }
 
 .header {
@@ -28,7 +35,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2.5rem;
-    border-bottom: 1px solid #e7edf4;
+    border-bottom: 1px solid #333; /* Adjust for dark mode */
+    background-color: #1e1e1e; /* Dark header background */
 }
 
 .header-left {
@@ -40,12 +48,13 @@
 .logo {
     width: 32px;
     height: 32px;
+    fill: #e0e0e0; /* Match text color */
 }
 
 .title {
     font-size: 1.125rem;
     font-weight: bold;
-    color: #0d141c;
+    color: #ffffff; /* Bright text for the title */
 }
 
 .header-right {
@@ -66,8 +75,8 @@
     height: 2.5rem;
     padding: 0 1rem;
     border-radius: 9999px;
-    background-color: #e7edf4;
-    color: #0d141c;
+    background-color: #333;
+    color: #e0e0e0;
     font-size: 0.875rem;
     font-weight: bold;
 }
@@ -94,8 +103,8 @@
     gap: 1.5rem;
     text-align: center;
     background-image: linear-gradient(
-            rgba(0, 0, 0, 0.1) 0%,
-            rgba(0, 0, 0, 0.4) 100%
+            rgba(0, 0, 0, 0.6) 0%,
+            rgba(0, 0, 0, 0.9) 100%
     ),
     url("https://cdn.usegalileo.ai/sdxl10/d8b47e60-8e57-4e08-8692-e0c2b5c54f4c.png");
     background-size: cover;
@@ -103,6 +112,7 @@
     border-radius: 1rem;
     padding: 2rem;
     min-height: 30rem;
+    color: #ffffff;
 }
 
 .text-section {
@@ -115,12 +125,24 @@
 .main-heading {
     font-size: 2.25rem;
     font-weight: 900;
-    color: #1a1a1a;
+    color: black;
 }
 
 .sub-heading {
     font-size: 1rem;
-    color: #1a1a1a;
+    color: black;
+}
+.avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 50%;
 }
 
 .cta-button {
@@ -130,4 +152,8 @@
     font-weight: bold;
     border-radius: 9999px;
     padding: 0.75rem 2rem;
+}
+
+.cta-button:hover {
+    background-color: #1a73e8;
 }

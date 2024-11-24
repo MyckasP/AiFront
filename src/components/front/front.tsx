@@ -13,7 +13,7 @@ const Front = () => {
     };
 
     const handleGetStarted = () => {
-        navigate("/chat");  // Navigate to ChatInput page
+        navigate("/chat"); // Navigate to ChatInput page
     };
 
     return (
@@ -58,7 +58,7 @@ const Front = () => {
                         <div
                             className="avatar"
                             style={{
-                                backgroundImage: `url("https://cdn.usegalileo.ai/stability/460d8af5-95c5-4db7-90ea-2f910a7e4c97.png")`,
+                                backgroundImage: 'url("https://cdn.usegalileo.ai/stability/460d8af5-95c5-4db7-90ea-2f910a7e4c97.png")',
                             }}
                         />
                     </div>
@@ -68,7 +68,7 @@ const Front = () => {
                         <div
                             className="hero-section"
                             style={{
-                                backgroundImage: `url(${welcomeimage}), linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1))`,
+                                backgroundImage: `url(${welcomeimage}), linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9))`,
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center',
                             }}

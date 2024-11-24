@@ -38,7 +38,7 @@ const ChatInput: React.FC = () => {
     };
 
     const handleCancel = () => {
-        navigate('/front');
+        navigate('/chat');
     };
 
     const handleContinue = async () => {
