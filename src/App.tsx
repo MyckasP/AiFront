@@ -5,7 +5,7 @@ import Signup from './components/login/Signup';
 import Front from './components/front/front';
 import ChatInput from './components/ChatInput/ChatInput';
 import Chat from './components/Chat/Chat';
-
+import Settings from './components/Settings/Settings';
 const App: React.FC = () => {
     const [isLogin, setIsLogin] = useState<boolean>(true);
 
@@ -25,7 +25,9 @@ const App: React.FC = () => {
                     />
                     <Route path="/front" element={<Front />} />
                     <Route path="/chatinput" element={<ChatInput />} />
-                    <Route path="/chat" element={<Chat />} /> {/* Add route for Chat component */}
+                    <Route path="/chat" element={<Chat />} />
+                    <Route path="/settings" element={<Settings />} />
+                    {/* Add route for Chat component */}
                 </Routes>
             </div>
         </Router>

@@ -10,6 +10,38 @@ interface LoginResponse {
     Message: string;
     userId: string; // Ensure correct casing to match backend response
 }
+interface ChangeUsernameResponse {
+    message: string;
+}
+
+interface ChangePasswordResponse {
+    message: string;
+}
+
+export const changeUsername = async (data: { userId: number; newUsername: string }): Promise<ChangeUsernameResponse> => {
+    try {
+        const response = await axios.put(`${API_URL}/change-username`, data);
+        return response.data as ChangeUsernameResponse;
+    } catch (error: any) {
+        console.error("Change Username API error:", error.response?.data || error.message);
+        throw new Error(error.response?.data || "Change username failed");
+    }
+};
+
+export const changePassword = async (data: {
+    userId: number;
+    oldPassword: string;
+    newPassword: string;
+    confirmNewPassword: string;
+}): Promise<ChangePasswordResponse> => {
+    try {
+        const response = await axios.put(`${API_URL}/change-password`, data);
+        return response.data as ChangePasswordResponse;
+    } catch (error: any) {
+        console.error("Change Password API error:", error.response?.data || error.message);
+        throw new Error(error.response?.data || "Change password failed");
+    }
+};
 
 export const signup = async (data: {
     username: string;

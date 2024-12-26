@@ -82,7 +82,10 @@ const Chat: React.FC = () => {
             );
         }
 
-        const content = aiResponse || '';
+        let content = aiResponse || '';
+        // Remove both '*' and '**' symbols from the AI response
+        content = content.replace(/\*\*/g, '').replace(/\*/g, '').trim();
+
         if (learningFormat === 'bulletPoints') {
             const points = content.split('\n').filter((point) => point.trim() !== '');
             return (
@@ -95,6 +98,7 @@ const Chat: React.FC = () => {
         }
         return <p className="chat-paragraph">{content}</p>;
     };
+
 
     const selectChat = (chat: SavedChat) => {
         setSelectedChat(chat);

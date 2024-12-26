@@ -1,5 +1,6 @@
 import React from "react";
 import "./front.css";
+import Settings from "../Settings/Settings";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom";
@@ -13,7 +14,10 @@ const Front = () => {
     };
 
     const handleGetStarted = () => {
-        navigate("/chat"); // Navigate to ChatInput page
+        navigate("/chat");
+    };
+    const handleSettings = () =>{
+        navigate("/settings");
     };
 
     return (
@@ -41,7 +45,8 @@ const Front = () => {
                     </div>
                     <div className="header-right">
                         <div className="buttons">
-                            <button className="button settings-btn">
+                            <button className="button settings-btn"
+                                    onClick={handleSettings}>
                                 <div className="icon">⚙️</div>
                             </button>
                             <button className="button help-btn">
@@ -52,9 +57,10 @@ const Front = () => {
                                 className="button logout-button"
                                 aria-label="Logout"
                             >
-                                <FontAwesomeIcon icon={faSignOutAlt} />
+                                <FontAwesomeIcon icon={faSignOutAlt}/>
                             </button>
                         </div>
+
                         <div
                             className="avatar"
                             style={{
