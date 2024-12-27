@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './ChatInput.css';
 
-// Define types for the API response
 interface AIResponseChoice {
     message: {
         content: string;

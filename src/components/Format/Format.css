@@ -1,0 +1,24 @@
+.formatted-content {
+    padding: 1rem;
+    line-height: 1.6;
+}
+
+.formatted-paragraphs {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.formatted-paragraph {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+.formatted-list {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-left: 2rem;
+}
+
+.formatted-list-item {
+    margin-bottom: 1rem;
+}

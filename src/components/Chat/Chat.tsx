@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { ChatService } from '../../Services/chat.service';
 import './Chat.css';
 import { SavedChat } from '../../Services/chat.service';
+import FormattedText from "../Format/Format";
 
 interface LocationState {
     aiResponse: string;
@@ -98,33 +99,26 @@ const Chat: React.FC = () => {
 
     const renderContent = () => {
         if (isNewChat) {
-            let content = aiResponse || '';
-            content = content.replace(/\*\*/g, '').replace(/\*/g, '').trim();
-
-            if (learningFormat === 'bulletPoints') {
-                const points = content.split('\n').filter((point) => point.trim() !== '');
-                return (
-                    <ul className="chat-bullet-list">
-                        {points.map((point, index) => (
-                            <li key={index}>{point}</li>
-                        ))}
-                    </ul>
-                );
-            }
-            return <p className="chat-paragraph">{content}</p>;
+            return (
+                <FormattedText
+                    content={aiResponse}
+                    format={learningFormat as 'paragraph' | 'bulletPoints' | 'numbered'}
+                />
+            );
         }
 
         if (selectedChat) {
             return (
                 <div>
                     <h4>{selectedChat.name}</h4>
-                    <p>{selectedChat.content}</p>
+                    <FormattedText content={selectedChat.content} />
                 </div>
             );
         }
 
         return <p>Select a chat or create a new one</p>;
     };
+
 
     return (
         <div className="chat-wrapper">

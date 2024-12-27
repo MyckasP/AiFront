@@ -2,7 +2,7 @@
 
 body {
     margin: 0;
-    background-color: #4B4B4B; /* Dark mode body background */
+    background-color: #212121; /* Dark mode body background */
     color: #e0e0e0; /* Light text color for dark mode */
 }
 
@@ -11,7 +11,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #121212; /* Match body background */
+    background-color: #212121; /* Match body background */
     overflow-x: hidden;
 }
 
@@ -36,7 +36,7 @@ body {
     align-items: center;
     padding: 1rem 2.5rem;
     border-bottom: 1px solid #333; /* Adjust for dark mode */
-    background-color: #040E13; /* Dark header background */
+    background-color: #212121; /* Dark header background */
 }
 
 .header-left {
@@ -96,7 +96,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 2rem 10rem;
-    background-color: #040D12;
+    background-color: #212121;
 }
 
 .hero-section {
