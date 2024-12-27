@@ -18,7 +18,17 @@ const Chat: React.FC = () => {
     const [userId, setUserId] = useState<number | null>(null);
     const [savedChats, setSavedChats] = useState<SavedChat[]>([]);
     const [selectedChat, setSelectedChat] = useState<SavedChat | null>(null);
+    const [isNewChat, setIsNewChat] = useState<boolean>(false);
     const chatService = new ChatService();
+
+    useEffect(() => {
+        if (aiResponse) {
+            setIsNewChat(true);
+            setSelectedChat(null);
+        } else {
+            setIsNewChat(false);
+        }
+    }, [aiResponse]);
 
     const handleSaveChat = () => setShowModal(true);
 
@@ -52,7 +62,16 @@ const Chat: React.FC = () => {
                 content: chat.chatContent,
                 timestamp: chat.timestamp,
             }));
-            setSavedChats(mappedChats);
+
+            const sortedChats = mappedChats.sort((a, b) =>
+                new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+            );
+
+            setSavedChats(sortedChats);
+
+            if (sortedChats.length > 0 && !selectedChat && !isNewChat) {
+                setSelectedChat(sortedChats[0]);
+            }
         } catch (error: any) {
             console.error('Error fetching saved chats:', error.message);
         }
@@ -72,7 +91,29 @@ const Chat: React.FC = () => {
         }
     }, [userId]);
 
+    const selectChat = (chat: SavedChat) => {
+        setSelectedChat(chat);
+        setIsNewChat(false);
+    };
+
     const renderContent = () => {
+        if (isNewChat) {
+            let content = aiResponse || '';
+            content = content.replace(/\*\*/g, '').replace(/\*/g, '').trim();
+
+            if (learningFormat === 'bulletPoints') {
+                const points = content.split('\n').filter((point) => point.trim() !== '');
+                return (
+                    <ul className="chat-bullet-list">
+                        {points.map((point, index) => (
+                            <li key={index}>{point}</li>
+                        ))}
+                    </ul>
+                );
+            }
+            return <p className="chat-paragraph">{content}</p>;
+        }
+
         if (selectedChat) {
             return (
                 <div>
@@ -82,39 +123,19 @@ const Chat: React.FC = () => {
             );
         }
 
-        let content = aiResponse || '';
-        // Remove both '*' and '**' symbols from the AI response
-        content = content.replace(/\*\*/g, '').replace(/\*/g, '').trim();
-
-        if (learningFormat === 'bulletPoints') {
-            const points = content.split('\n').filter((point) => point.trim() !== '');
-            return (
-                <ul className="chat-bullet-list">
-                    {points.map((point, index) => (
-                        <li key={index}>{point}</li>
-                    ))}
-                </ul>
-            );
-        }
-        return <p className="chat-paragraph">{content}</p>;
-    };
-
-
-    const selectChat = (chat: SavedChat) => {
-        setSelectedChat(chat);
+        return <p>Select a chat or create a new one</p>;
     };
 
     return (
         <div className="chat-wrapper">
             <div className="chat-sidebar">
                 <div className="sidebar-header">Saved Chats</div>
-
                 <div className="saved-chats-list">
                     {savedChats.length > 0 ? (
                         savedChats.map((chat, index) => (
                             <div
                                 key={index}
-                                className="saved-chat-item"
+                                className={`saved-chat-item ${selectedChat?.name === chat.name ? 'selected' : ''}`}
                                 onClick={() => selectChat(chat)}
                                 role="button"
                                 tabIndex={0}
@@ -130,7 +151,7 @@ const Chat: React.FC = () => {
             </div>
             <div className="chat-container">
                 <div className="chat-header">
-                    {selectedChat ? `Chat: ${selectedChat.name}` : 'AI Suggested Learning Content'}
+                    {isNewChat ? 'New Chat' : selectedChat ? `Chat: ${selectedChat.name}` : 'Select a Chat'}
                     <button
                         className="exit-icon"
                         onClick={() => navigate('/front')}

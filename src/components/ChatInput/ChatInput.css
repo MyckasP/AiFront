@@ -10,8 +10,8 @@ body {
 .chat-input-container {
     position: relative;
     display: flex;
-    height: 100vh;
-    background-color: #212121; /* Dark background */
+    height: 80vh;
+    background-color:#121212; /* Dark background */
 }
 
 /* Layout Container */
@@ -48,15 +48,32 @@ body {
     font-size: 14px;
     line-height: 1.6;
     margin-bottom: 12px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
 }
 
-/* Select Containers */
+/* Modify the existing select containers section in your CSS */
 .select-container {
     display: flex;
     max-width: 480px;
     gap: 16px;
     padding: 12px;
+    width: calc(50% - 16px); /* Make each container take up half the width minus gap */
+    margin: 0;
+    box-sizing: border-box;
 }
+
+/* Add a new wrapper for select containers */
+.select-containers-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    width: 100%;
+    padding: 12px;
+    justify-content: flex-start;
+}
+
 
 .select-label {
     display: flex;

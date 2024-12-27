@@ -24,6 +24,11 @@ const ChatInput: React.FC = () => {
     const handleStudyTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setStudyTime(event.target.value);
     };
+    const generateChatTitle = (content: string): string => {
+        if (!content) return "Untitled Chat";
+        const sentences = content.split('.').filter((sentence) => sentence.trim().length > 0);
+        return sentences[0].length > 50 ? `${sentences[0].slice(0, 50)}...` : sentences[0];
+    };
 
     const handleTopicChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTopic(event.target.value);
@@ -77,69 +82,75 @@ const ChatInput: React.FC = () => {
         <div className="chat-input-container">
             <div className="layout-container flex h-full grow flex-col">
                 <div className="px-40 flex flex-1 justify-center py-5">
-                    <div className="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
-                        <h1 className="title">Let's personalize your study plan</h1>
+                    <div
+                        className="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
+                        <h1 className="title">Let's personalize your study plan </h1>
                         <p className="description">
+
                             This will help me suggest the most relevant content and pace your learning.
                         </p>
-                        <div className="select-container">
-                            <label className="select-label">
-                                <p className="select-title">I want to learn about...</p>
-                                <input
-                                    type="text"
-                                    className="select-input"
-                                    placeholder="Enter a topic"
-                                    value={topic}
-                                    onChange={handleTopicChange}
-                                />
-                            </label>
+                        <div className="select-containers-wrapper">
+                            <div className="select-container">
+                                <label className="select-label">
+                                    <p className="select-title">I want to learn about...</p>
+                                    <input
+                                        type="text"
+                                        className="select-input"
+                                        placeholder="Enter a topic"
+                                        value={topic}
+                                        onChange={handleTopicChange}
+                                    />
+                                </label>
+                            </div>
+                            <div className="select-container">
+                                <label className="select-label">
+                                    <p className="select-title">Difficulty</p>
+                                    <select className="select-input" value={difficulty}
+                                            onChange={handleDifficultyChange}>
+                                        <option value="">Select a difficulty level</option>
+                                        <option value="easy">Easy</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="hard">Hard</option>
+                                    </select>
+                                </label>
+                            </div>
+                            <div className="select-container">
+                                <label className="select-label">
+                                    <p className="select-title">Length (in minutes)</p>
+                                    <input
+                                        type="number"
+                                        className="select-input"
+                                        placeholder="Enter study time"
+                                        value={studyTime}
+                                        onChange={handleStudyTimeChange}
+                                    />
+                                </label>
+                            </div>
+                            <div className="select-container">
+                                <label className="select-label">
+                                    <p className="select-title">Learning format</p>
+                                    <select className="select-input" value={learningFormat}
+                                            onChange={handleLearningFormatChange}>
+                                        <option value="">Select a learning format</option>
+                                        <option value="paragraph">Paragraph</option>
+                                        <option value="bulletPoints">Bullet Points</option>
+                                    </select>
+                                </label>
+                            </div>
                         </div>
-                        <div className="select-container">
-                            <label className="select-label">
-                                <p className="select-title">Difficulty</p>
-                                <select className="select-input" value={difficulty} onChange={handleDifficultyChange}>
-                                    <option value="">Select a difficulty level</option>
-                                    <option value="easy">Easy</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="hard">Hard</option>
-                                </select>
-                            </label>
-                        </div>
-                        <div className="select-container">
-                            <label className="select-label">
-                                <p className="select-title">Length (in minutes)</p>
-                                <input
-                                    type="number"
-                                    className="select-input"
-                                    placeholder="Enter study time"
-                                    value={studyTime}
-                                    onChange={handleStudyTimeChange}
-                                />
-                            </label>
-                        </div>
-                        <div className="select-container">
-                            <label className="select-label">
-                                <p className="select-title">Learning format</p>
-                                <select className="select-input" value={learningFormat} onChange={handleLearningFormatChange}>
-                                    <option value="">Select a learning format</option>
-                                    <option value="paragraph">Paragraph</option>
-                                    <option value="bulletPoints">Bullet Points</option>
-                                </select>
-                            </label>
-                        </div>
-                        <div className="button-container">
-                            <button className="cancel-button" onClick={handleCancel}>
-                                <span className="truncate">Cancel</span>
-                            </button>
-                            <button className="continue-button" onClick={handleContinue}>
-                                <span className="truncate">Continue</span>
-                            </button>
+                            <div className="button-container flex flex-1 justify-center ">
+                                <button className="cancel-button" onClick={handleCancel}>
+                                    <span className="truncate">Cancel</span>
+                                </button>
+                                <button className="continue-button" onClick={handleContinue}>
+                                    <span className="truncate">Continue</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    );
-};
+            );
+            };
 
 export default ChatInput;
