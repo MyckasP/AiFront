@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://localhost:7096/api/Account";
+export const API_URL = "https://localhost:7096/api/Account";
 
 interface SignupResponse {
     message: string;
@@ -17,7 +17,9 @@ interface ChangeUsernameResponse {
 interface ChangePasswordResponse {
     message: string;
 }
-
+interface UserResponse {
+    username: string;
+}
 export const changeUsername = async (data: { userId: number; newUsername: string }): Promise<ChangeUsernameResponse> => {
     try {
         const response = await axios.put(`${API_URL}/change-username`, data);
@@ -42,6 +44,21 @@ export const changePassword = async (data: {
         throw new Error(error.response?.data || "Change password failed");
     }
 };
+export const getUserInfo = async (userId: number): Promise<UserResponse> => {
+    try {
+        const response = await axios.get(`${API_URL}/user/${userId}`, {
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        return response.data as UserResponse;
+    } catch (error: any) {
+        console.error("Get User Info API error:", error);
+        throw new Error("Failed to fetch user info");
+    }
+};
+
 
 export const signup = async (data: {
     username: string;

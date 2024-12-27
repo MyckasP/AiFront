@@ -4,7 +4,7 @@ import { ChatService } from '../../Services/chat.service';
 import './Chat.css';
 import { SavedChat } from '../../Services/chat.service';
 import FormattedText from "../Format/Format";
-
+import Avatar from "../Avatar/Avatar";
 interface LocationState {
     aiResponse: string;
     learningFormat: string;
@@ -21,6 +21,19 @@ const Chat: React.FC = () => {
     const [selectedChat, setSelectedChat] = useState<SavedChat | null>(null);
     const [isNewChat, setIsNewChat] = useState<boolean>(false);
     const chatService = new ChatService();
+    const [username, setUsername] = useState<string>('');
+
+    useEffect(() => {
+        const storedUserId = localStorage.getItem('userId');
+        const storedUsername = localStorage.getItem('username');
+        if (storedUserId) {
+            const id = Number(storedUserId);
+            setUserId(id);
+        }
+        if (storedUsername) {
+            setUsername(storedUsername);
+        }
+    }, []);
 
     useEffect(() => {
         if (aiResponse) {
@@ -53,7 +66,9 @@ const Chat: React.FC = () => {
             alert('Failed to save chat.');
         }
     };
-
+    const handleSettings = () =>{
+        navigate("/settings");
+    };
     const fetchSavedChats = async () => {
         if (userId === null) return;
         try {
@@ -124,6 +139,7 @@ const Chat: React.FC = () => {
         <div className="chat-wrapper">
             <div className="chat-sidebar">
                 <div className="sidebar-header">Saved Chats</div>
+
                 <div className="saved-chats-list">
                     {savedChats.length > 0 ? (
                         savedChats.map((chat, index) => (
@@ -143,9 +159,12 @@ const Chat: React.FC = () => {
                     )}
                 </div>
             </div>
+
             <div className="chat-container">
+
                 <div className="chat-header">
                     {isNewChat ? 'New Chat' : selectedChat ? `Chat: ${selectedChat.name}` : 'Select a Chat'}
+
                     <button
                         className="exit-icon"
                         onClick={() => navigate('/front')}
@@ -168,6 +187,8 @@ const Chat: React.FC = () => {
                             <line x1="21" y1="12" x2="9" y2="12"></line>
                         </svg>
                     </button>
+                    <Avatar />
+
                 </div>
                 <div className="chat-content">
                     {renderContent()}

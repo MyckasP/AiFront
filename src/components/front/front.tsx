@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom";
 import welcomeimage from '../../assets/welcomeimage.png';
+import Avatar from "../Avatar/Avatar";
 
 const Front = () => {
     const navigate = useNavigate();
@@ -16,7 +17,8 @@ const Front = () => {
     const handleGetStarted = () => {
         navigate("/chat");
     };
-    const handleSettings = () =>{
+
+    const handleSettings = () => {
         navigate("/settings");
     };
 
@@ -60,13 +62,9 @@ const Front = () => {
                                 <FontAwesomeIcon icon={faSignOutAlt}/>
                             </button>
                         </div>
-
-                        <div
-                            className="avatar"
-                            style={{
-                                backgroundImage: 'url("https://cdn.usegalileo.ai/stability/460d8af5-95c5-4db7-90ea-2f910a7e4c97.png")',
-                            }}
-                        />
+                        <div className="avatar">
+                            <Avatar />
+                        </div>
                     </div>
                 </header>
                 <div className="content">
@@ -89,7 +87,7 @@ const Front = () => {
                             </div>
                             <button
                                 className="cta-button"
-                                onClick={handleGetStarted} // Trigger the redirection
+                                onClick={handleGetStarted}
                             >
                                 Get Started
                             </button>

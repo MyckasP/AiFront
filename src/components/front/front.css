@@ -31,6 +31,7 @@ body {
 }
 
 .header {
+    height:8vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -43,7 +44,6 @@ body {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-top: 5vh;
 }
 
 .logo {
@@ -62,7 +62,6 @@ body {
     display: flex;
     align-items: center;
     gap: 2rem;
-    margin-top: 5vh;
 }
 
 .buttons {
