@@ -1,0 +1,273 @@
+.chat-wrapper {
+    display: flex;
+    height: 100vh;
+    background-color: #000; /* Dark background */
+    font-family: 'Arial', sans-serif;
+    color: #fff; /* White text */
+    animation: fadeIn 0.5s ease-in-out; /* Fade in effect */
+}
+.chat-sidebar {
+    width: 25%;
+    background-color: #111;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #444;
+    transition: background-color 0.3s;
+}
+
+.saved-chats-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+
+.sidebar-header {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+    color: #f5f5f5;
+}
+
+.saved-chats-list {
+    align-content: flex-start;
+    font-size: 15px;
+    list-style: none;
+    padding: 0;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: #888 #212121;
+    max-height: calc(100vh);
+}
+
+/* Webkit scrollbar styling */
+.saved-chats-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.saved-chats-list::-webkit-scrollbar-track {
+    background: #212121;
+}
+
+.saved-chats-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.saved-chats-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+
+.saved-chat-item {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #222;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.saved-chat-item:hover {
+    background-color: #444;
+}
+
+
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    flex-grow: 1;
+    margin: 30px;
+    background-color: #212121; /* Slightly lighter than main background */
+    border-radius: 10px;
+    border: 1px solid #444;
+    animation: slideIn 0.5s ease-in-out; /* Slide in animation */
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #f5f5f5;
+}
+.small-nav{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+.exit-icon {
+    width: 8vh;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+.exit-icon:hover{
+    background: #333333;
+}
+.chat-content {
+    padding: 20px;
+    background-color: #333;
+    border-radius: 8px;
+    min-height: 300px;
+    overflow-y: scroll;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #ddd;
+    scrollbar-width: thin;
+    scrollbar-color: #888 #212121;
+}
+
+.chat-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-content::-webkit-scrollbar-track {
+    background: #212121;
+}
+
+.chat-content::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+}
+
+.chat-content::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+
+.chat-bullet-list {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.chat-paragraph {
+    line-height: 1.6;
+}
+
+.chat-footer {
+    display: flex;
+    gap: 8px; /* Ensures a minimum 5px gap between buttons */
+    justify-content: center; /* Centers the buttons */
+    text-align: center;
+}
+
+.new-chat-button {
+    width: 45%;
+    padding: 10px;
+    background-color: #444;
+    color: white;
+    border: 1px solid #666;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.new-chat-button:hover {
+    background-color: #555;
+}
+
+.save-chat-button {
+    width: 45%;
+    padding: 10px;
+    background-color: #222;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.save-chat-button:hover {
+    background-color: #333;
+}
+
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    animation: fadeInModal 0.3s ease-in-out;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+    background-color: #333;
+    color: white;
+}
+
+.modal button {
+    padding: 10px;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.modal button:hover {
+    background-color: #555;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInModal {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

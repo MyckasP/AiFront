@@ -1,0 +1,70 @@
+/* Signup Page Styling */
+body {
+    background: #040D12;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.signup-container {
+    background-color: #183D3D;
+    padding: 40px;
+    border-radius: 8px;
+    width: 300px;
+    margin: 100px auto;
+    text-align: center;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    background-color: #1f4d4d;
+    color: white;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.success-message {
+    color: green;
+    margin-top: 10px;
+}
+
+.switch-link {
+    color: #4CAF50;
+    cursor: pointer;
+}
+
+.switch-link:hover {
+    text-decoration: underline;
+}
