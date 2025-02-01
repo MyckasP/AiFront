@@ -164,7 +164,7 @@ const Chat: React.FC = () => {
 
                 <div className="chat-header">
                     {isNewChat ? 'New Chat' : selectedChat ? `Chat: ${selectedChat.name}` : 'Select a Chat'}
-
+<div className="small-nav">
                     <button
                         className="exit-icon"
                         onClick={() => navigate('/front')}
@@ -188,7 +188,7 @@ const Chat: React.FC = () => {
                         </svg>
                     </button>
                     <Avatar />
-
+</div>
                 </div>
                 <div className="chat-content">
                     {renderContent()}

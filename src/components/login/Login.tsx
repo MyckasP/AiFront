@@ -10,7 +10,7 @@ interface LoginProps {
 
 interface LoginResponse {
     Message: string;
-    userId: string; // This should match the backend response field
+    userId: string;
 }
 
 const Login: React.FC<LoginProps> = ({ switchToSignup }) => {
@@ -32,13 +32,11 @@ const Login: React.FC<LoginProps> = ({ switchToSignup }) => {
         try {
             const response: LoginResponse = await login(formData);
 
-            // Log the full response to check its structure
             console.log("Full response from backend:", response);
 
-            // Check if userId exists in the response (with exact casing)
             if (response && response.userId) {
-                console.log("User ID:", response.userId); // Logging UserId
-                localStorage.setItem("userId", response.userId); // Store UserId in localStorage
+                console.log("User ID:", response.userId);
+                localStorage.setItem("userId", response.userId);
                 setSuccess(response.Message);
                 navigate("/front");
             } else {
@@ -48,7 +46,7 @@ const Login: React.FC<LoginProps> = ({ switchToSignup }) => {
         } catch (err: any) {
             const errorMessage =
                 err.response?.data || err.message || "An unexpected error occurred.";
-            console.error("Error occurred:", errorMessage); // Log error details
+            console.error("Error occurred:", errorMessage);
             setError(errorMessage);
         }
     };
