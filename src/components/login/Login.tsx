@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { login } from "../../Services/apiService";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import loginbackground from '../../assets/loginbackground.jpg';
 
 interface LoginProps {
     switchToSignup: () => void;
@@ -17,7 +16,6 @@ const Login: React.FC<LoginProps> = ({ switchToSignup }) => {
     const [formData, setFormData] = useState({ usernameOrEmail: "", password: "" });
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
-
     const navigate = useNavigate();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,54 +29,54 @@ const Login: React.FC<LoginProps> = ({ switchToSignup }) => {
 
         try {
             const response: LoginResponse = await login(formData);
-
-            console.log("Full response from backend:", response);
-
             if (response && response.userId) {
-                console.log("User ID:", response.userId);
                 localStorage.setItem("userId", response.userId);
                 setSuccess(response.Message);
                 navigate("/front");
-            } else {
-                console.error("UserId is undefined in the response");
             }
-
         } catch (err: any) {
             const errorMessage =
                 err.response?.data || err.message || "An unexpected error occurred.";
-            console.error("Error occurred:", errorMessage);
             setError(errorMessage);
         }
     };
 
     return (
-        <div className="login-container">
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-                <input
-                    name="usernameOrEmail"
-                    type="text"
-                    placeholder="Username or Email"
-                    value={formData.usernameOrEmail}
-                    onChange={handleChange}
-                />
-                <input
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    value={formData.password}
-                    onChange={handleChange}
-                />
-                <button type="submit">Login</button>
-            </form>
-            {error && <p className="error-message">{error}</p>}
-            {success && <p className="success-message">{success}</p>}
-            <p>
-                Don't have an account?{" "}
-                <span onClick={switchToSignup} className="switch-link">
-                    Sign up
-                </span>
-            </p>
+        <div className="login-page">
+            <div className="login-card">
+                <h2>Welcome Back</h2>
+                <form onSubmit={handleLogin}>
+                    <div className="input-group">
+                        <label htmlFor="usernameOrEmail">Username or Email</label>
+                        <input
+                            id="usernameOrEmail"
+                            name="usernameOrEmail"
+                            type="text"
+                            value={formData.usernameOrEmail}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+                {error && <p className="error-message">{error}</p>}
+                {success && <p className="success-message">{success}</p>}
+                <p className="signup-link">
+                    Don't have an account?{" "}
+                    <span onClick={switchToSignup}>Sign up</span>
+                </p>
+            </div>
         </div>
     );
 };
