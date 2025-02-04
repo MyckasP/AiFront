@@ -1,44 +1,32 @@
-import React, { useState} from "react";
-import { changeUsername, changePassword } from "../../Services/apiService";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Settings.css";
+
 const Settings = () => {
-    const [userId] = useState(1);
     const [newUsername, setNewUsername] = useState("");
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
     const [message, setMessage] = useState("");
     const [activeSection, setActiveSection] = useState("username");
+    const navigate = useNavigate();
 
     const handleChangeUsername = async () => {
-        try {
-            const response = await changeUsername({ userId, newUsername });
-            setMessage(response.message);
-        } catch (error) {
-            if (error instanceof Error) {
-                setMessage(error.message);
-            } else {
-                setMessage("An unexpected error occurred");
-            }
-        }
+        // Placeholder
+        setMessage("Username change functionality will be implemented soon!");
     };
 
     const handleChangePassword = async () => {
-        try {
-            const response = await changePassword({ userId, oldPassword, newPassword, confirmNewPassword });
-            setMessage(response.message);
-        } catch (error) {
-            if (error instanceof Error) {
-                setMessage(error.message);
-            } else {
-                setMessage("An unexpected error occurred");
-            }
-        }
+        // Placeholder
+        setMessage("Password change functionality will be implemented soon!");
     };
 
     return (
         <div className="settings-container">
             <div className="sidebar">
+                <button onClick={() => navigate("/front")} className="back-button">
+                    Back to Home
+                </button>
                 <button
                     onClick={() => setActiveSection("username")}
                     className={activeSection === "username" ? "active" : ""}
